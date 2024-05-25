@@ -21,9 +21,20 @@ class Article:
 
 class Author:
     def __init__(self, name):
-        self.name = name
+        self._name = name
 
-   
+    @property
+    def name(self):
+        return self._name
+    
+    @name.setter
+    def name(self, value):
+        if not isinstance(value, str):
+            raise TypeError("Author's name must be a string")
+        elif hasattr(self,"_name"):
+            raise AttributeError("Author's name cannot be changed")
+        else:
+            self._name = value
 
     def add_article(self, magazine, title):
         pass
