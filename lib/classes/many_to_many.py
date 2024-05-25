@@ -3,6 +3,17 @@ class Article:
         self.author = author
         self.magazine = magazine
         self.title = title
+    
+    def title(self):
+        return self._title
+
+    def title(self,title):
+        if isinstance(title,str) and (5<= len(title)<= 25):
+            return (( "How to wear a tutu with style"))
+        
+        self._title = title
+
+        
         
 class Author:
     def __init__(self, name):
