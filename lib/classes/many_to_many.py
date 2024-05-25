@@ -9,11 +9,10 @@ class Article:
 
     def title(self,title):
         if isinstance(title,str) and (5<= len(title)<= 25):
-            return (( "How to wear a tutu with style"))
-        
-        self._title = title
-
-        
+            self._title = title
+            #return (( "How to wear a tutu with style"))
+        print
+#article_1 = Article('author','magazine', "How to wear a tutu with style")          
         
 class Author:
     def __init__(self, name):
