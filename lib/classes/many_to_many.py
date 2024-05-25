@@ -1,9 +1,11 @@
 class Article:
+    all = []
     def __init__(self, author, magazine, title):
         self.author = author
         self.magazine = magazine
         self._title = title
         #self.set_title(title)
+        Article.all.append(self)
 
     def set_title(self, title):
         if not isinstance(title, str) and (5 <= len(title) <= 50):
@@ -14,6 +16,8 @@ class Article:
     @property
     def title(self):
         return self._title
+    
+ 
 
 class Author:
     def __init__(self, name):
