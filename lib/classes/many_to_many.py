@@ -23,8 +23,8 @@ class Author:
  
     def __init__(self, name):
         self._name = name
-        articles =[]
-        self._articles = articles
+        #articles =[]
+        self._articles = []
 
     @property
     def name(self):
@@ -39,16 +39,20 @@ class Author:
         else:
             self._name = value
 
+    def articles(self):
+        return self._articles
+    
     def add_article(self, magazine, title):
        article = Article(self,magazine,title)
        self._articles.append(article)
        
-        
-    def articles(self):
-        return self._articles
+    def magazines(self):
+        return list(set(article.magazine for article in self._articles))
 
     def topic_areas(self):
-        pass
+        if not self._articles:
+            return None
+        return list(set(article.magazine.category for article in self._articles))
 
 class Magazine:
     def __init__(self, name, category):
@@ -80,7 +84,7 @@ class Magazine:
             raise ValueError("Magazine category must be a non-empty string")
 
     def articles(self):
-        pass
+        return self._articles
 
     def contributors(self):
         pass
