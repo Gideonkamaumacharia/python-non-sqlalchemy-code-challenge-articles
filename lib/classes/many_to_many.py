@@ -45,9 +45,10 @@ class Author:
     def add_article(self, magazine, title):
        article = Article(self,magazine,title)
        self._articles.append(article)
-       
+       return article
+    
     def magazines(self):
-        return list(set(article.magazine for article in self._articles))
+        return list(set([article.magazine for article in self._articles]))
 
     def topic_areas(self):
         if not self._articles:
@@ -60,6 +61,8 @@ class Magazine:
         self._category = None
         self.name = name
         self.category = category
+        self._articles = []
+        self._contributors = set()
 
     @property
     def name(self):
@@ -83,17 +86,29 @@ class Magazine:
         else:
             raise ValueError("Magazine category must be a non-empty string")
 
+    def add_article(self, author, title):
+        article = Article(author, self, title)
+        self._articles.append(article)
+        self._contributors.add(author)
+        return article
+
     def articles(self):
         return self._articles
 
     def contributors(self):
-        pass
+        return list(self._contributors)
 
     def article_titles(self):
-        pass
+         return [article.title for article in self._articles]
 
     def contributing_authors(self):
-        pass
+        authors_dict = {}
+        for article in self._articles:
+            if article.author in authors_dict:
+                authors_dict[article.author] += 1
+            else:
+                authors_dict[article.author] = 1
+        return [author for author, count in authors_dict.items() if count > 2]
 
 
 
